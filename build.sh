@@ -29,3 +29,11 @@ makeflags+=" O=${output_path}"
 make ${makeflags} "${projectName}_defconfig"
 
 make ${makeflags} Image.gz-dtb
+
+echo "**** Generate download images ****"
+
+mkimg="${source_path}/tools/mkimage"
+
+if [ ! -x ${mkimg} ]; then chmod a+x ${mkimg}; fi
+
+${mkimg} "${output_path}/arch/arm64/boot/Image.gz-dtb" KERNEL > "${output_path}/kernel_${projectName}.bin"
