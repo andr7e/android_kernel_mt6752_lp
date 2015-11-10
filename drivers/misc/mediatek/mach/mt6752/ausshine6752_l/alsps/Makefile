@@ -11,3 +11,7 @@ ifeq ($(CONFIG_MTK_LTR559),y)
 obj-y	+=  ltr559/
 endif
 
+ifeq ($(CONFIG_MTK_EPL2182_NEW),y)
+obj-y	+=  EPL2182-new/
+endif
+
