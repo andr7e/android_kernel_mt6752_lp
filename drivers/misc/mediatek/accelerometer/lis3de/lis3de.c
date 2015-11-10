@@ -148,7 +148,7 @@ static struct platform_driver lis3de_gsensor_driver;
 static struct lis3de_i2c_data *obj_i2c_data = NULL;
 static bool sensor_power = false;
 static GSENSOR_VECTOR3D gsensor_gain, gsensor_offset;
-static char selftestRes[10] = {0};
+//static char selftestRes[10] = {0};
 
 
 
@@ -239,7 +239,7 @@ static int LIS3DE_SetDataResolution(struct lis3de_i2c_data *obj)
 	int err;
 	u8  dat, reso;
 
-	if(err = hwmsen_read_byte(obj->client, LIS3DE_REG_CTL_REG4, &dat))
+	if((err = hwmsen_read_byte(obj->client, LIS3DE_REG_CTL_REG4, &dat)))
 	{
 		GSE_ERR("write data format fail!!\n");
 		return err;
@@ -1106,7 +1106,7 @@ static ssize_t store_trace_value(struct device_driver *ddri, char *buf, size_t c
 	}	
 	else
 	{
-		GSE_ERR("invalid content: '%s', length = %d\n", buf, count);
+		GSE_ERR("invalid content: '%s', length = %d\n", buf, (int)count);
 	}
 	
 	return count;    
@@ -1672,7 +1672,7 @@ static int lis3de_i2c_probe(struct i2c_client *client, const struct i2c_device_i
 
 	obj->hw = get_cust_acc_hw();
 	
-	if(err = hwmsen_get_convert(obj->hw->direction, &obj->cvt))
+	if((err = hwmsen_get_convert(obj->hw->direction, &obj->cvt)))
 	{
 		GSE_ERR("invalid direction: %d\n", obj->hw->direction);
 		goto exit;
@@ -1711,13 +1711,13 @@ static int lis3de_i2c_probe(struct i2c_client *client, const struct i2c_device_i
 	}
 	
 
-	if(err = misc_register(&lis3de_device))
+	if((err = misc_register(&lis3de_device)))
 	{
 		GSE_ERR("lis3de_device register failed\n");
 		goto exit_misc_device_register_failed;
 	}
 
-	if(err = lis3de_create_attr(&lis3de_gsensor_driver.driver))
+	if((err = lis3de_create_attr(&lis3de_gsensor_driver.driver)))
 	{
 		GSE_ERR("create attribute err = %d\n", err);
 		goto exit_create_attr_failed;
@@ -1726,7 +1726,7 @@ static int lis3de_i2c_probe(struct i2c_client *client, const struct i2c_device_i
 	sobj.self = obj;
     sobj.polling = 1;
     sobj.sensor_operate = gsensor_operate;
-	if(err = hwmsen_attach(ID_ACCELEROMETER, &sobj))
+	if((err = hwmsen_attach(ID_ACCELEROMETER, &sobj)))
 	{
 		GSE_ERR("attach fail = %d\n", err);
 		goto exit_kfree;
@@ -1759,18 +1759,17 @@ static int lis3de_i2c_remove(struct i2c_client *client)
 {
 	int err = 0;	
 	
-	if(err = lis3de_delete_attr(&lis3de_gsensor_driver.driver))
+	if((err = lis3de_delete_attr(&lis3de_gsensor_driver.driver)))
 	{
 		GSE_ERR("lis3de_delete_attr fail: %d\n", err);
 	}
 	
-	if(err = misc_deregister(&lis3de_device))
+	if((err = misc_deregister(&lis3de_device)))
 	{
 		GSE_ERR("misc_deregister fail: %d\n", err);
 	}
 
-	if(err = hwmsen_detach(ID_ACCELEROMETER))
-	    
+	if((err = hwmsen_detach(ID_ACCELEROMETER)))
 
 	lis3de_i2c_client = NULL;
 	i2c_unregister_device(client);
