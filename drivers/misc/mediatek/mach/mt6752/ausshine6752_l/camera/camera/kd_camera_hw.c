@@ -157,6 +157,19 @@ PowerUp PowerOnList={
                 {RST,   Vol_High, 0}
             },
         },
+		{SENSOR_DRVNAME_GC2355_MIPI_RAW,
+			{
+				{SensorMCLK,Vol_High, 0},
+				{AVDD,	Vol_2800, 0},
+				{DOVDD, Vol_1800, 0},
+				{DVDD,	Vol_1800, 0},
+				{AFVDD, Vol_2800, 10},	
+				{PDN,	Vol_High,  5},
+				{RST,	Vol_Low,  5},
+				{PDN,	Vol_Low, 5},
+				{RST,	Vol_High, 5},
+			},
+		},
 
 		{SENSOR_DRVNAME_S5K3L2XX_MIPI_RAW,
 			{
