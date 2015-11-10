@@ -1128,6 +1128,10 @@ config MTK_BMA250E
         bool "MTK_BMA250E for MediaTek package"
         default n
 
+config MTK_LIS3DE
+        bool "MTK_LIS3DE for MediaTek package"
+        default n
+
 # Gyro sensor
 config MTK_MPU3050C
 	bool "MPU3050C for MediaTek package"

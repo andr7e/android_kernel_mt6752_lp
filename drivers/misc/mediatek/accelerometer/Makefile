@@ -59,3 +59,7 @@ endif
 ifeq ($(CONFIG_MTK_MPU60X0),y)
 obj-y   +=  mpu60x0/
 endif
+
+ifeq ($(CONFIG_MTK_LIS3DE),y)
+obj-y += lis3de/
+endif

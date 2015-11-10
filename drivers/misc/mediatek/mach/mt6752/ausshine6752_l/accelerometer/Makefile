@@ -7,6 +7,11 @@ ifeq ($(CONFIG_MTK_MPU6515A),y)
 obj-y	+=  mpu6515/
 endif
 
+ifeq ($(CONFIG_MTK_LIS3DE),y)
+obj-y	+=  lis3de/
+endif
+
 ifeq ($(CONFIG_MTK_BMA250E),y)
 obj-y   +=  bma250e/
 endif
+
