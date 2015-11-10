@@ -1,7 +1,6 @@
 #ifndef _CUST_PE_H_
 #define _CUST_PE_H_
 
-/* Pump Express support (fast charging) */
 #ifdef CONFIG_MTK_PUMP_EXPRESS_PLUS_SUPPORT
 #define TA_START_BATTERY_SOC	1
 #define TA_STOP_BATTERY_SOC 	95
@@ -12,10 +11,10 @@
 
 #undef V_CHARGER_MAX
 #ifdef TA_9V_SUPPORT
-#define V_CHARGER_MAX 10500				// 10.5 V
+#define V_CHARGER_MAX 10500				
 #else
-#define V_CHARGER_MAX 7500				// 7.5 V
+#define V_CHARGER_MAX 7500				
 #endif
 #endif
 
-#endif /* _CUST_PE_H_ */ 
+#endif  

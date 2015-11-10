@@ -1,20 +1,12 @@
 #ifndef _CUST_PMIC_H_
 #define _CUST_PMIC_H_
 
-//#define PMIC_VDVFS_CUST_ENABLE
 
 #define LOW_POWER_LIMIT_LEVEL_1 15
 
-//Define for disable low battery protect feature, default no define for enable low battery protect.
-//#define DISABLE_LOW_BATTERY_PROTECT    
                                          
-//Define for disable battery OC protect
-//#define DISABLE_BATTERY_OC_PROTECT     
                                          
-//Define for disable battery 15% protect 
-//#define DISABLE_BATTERY_PERCENT_PROTECT
 
-//Define for DLPT
 #define DISABLE_DLPT_FEATURE
 
 #define POWER_INT0_VOLT 3400
@@ -27,7 +19,6 @@
 #define POWER_BAT_OC_CURRENT_L_RE 4000
 
 
-//#define BATTERY_MODULE_INIT
 
 #if defined(CONFIG_MTK_BQ24196_SUPPORT)\
 	||defined(CONFIG_MTK_BQ24296_SUPPORT)\
@@ -50,9 +41,8 @@
 #define EXTERNAL_SWCHR_SUPPORT
 #endif
 
-/* ADC Channel Number */
 typedef enum {
-	//MT6325
+	
 	AUX_BATSNS_AP =		0x000,
 	AUX_ISENSE_AP,
 	AUX_VCDT_AP,
@@ -77,4 +67,4 @@ typedef enum {
 	AUX_CH15 = 		0x4011,
 } upmu_adc_chl_list_enum;
 
-#endif /* _CUST_PMIC_H_ */ 
+#endif  
