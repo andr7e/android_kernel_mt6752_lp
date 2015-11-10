@@ -21,14 +21,16 @@
 #include <cust_kpd.h>
 #include <mach/mt_pm_ldo.h>
 #include <linux/delay.h>
+/* include PMIC header file */
 #include <mach/mt_typedefs.h>
 #include <mach/upmu_common_sw.h>
 #include <mach/upmu_hw.h>
 
 #define KPD_PWRKEY_USE_EINT KPD_NO
 #define KPD_PWRKEY_USE_PMIC KPD_YES
-#define KPD_DRV_CTRL_BACKLIGHT	KPD_NO	
-#define KPD_BACKLIGHT_TIME	8	
+#define KPD_DRV_CTRL_BACKLIGHT	KPD_NO	/* retired, move to Lights framework */
+#define KPD_BACKLIGHT_TIME	8	/* sec */
+/* the keys can wake up the system and we should enable backlight */
 #define KPD_BACKLIGHT_WAKE_KEY	\
 {				\
 	KEY_ENDCALL, KEY_POWER,	\
@@ -44,7 +46,7 @@ static inline bool powerOff_slidePin_interface(){
 }
 #endif
 #define KPD_SLIDE_EINT		CUST_EINT_KPD_SLIDE_NUM
-#define KPD_SLIDE_DEBOUNCE	CUST_EINT_KPD_SLIDE_DEBOUNCE_CN		
+#define KPD_SLIDE_DEBOUNCE	CUST_EINT_KPD_SLIDE_DEBOUNCE_CN		/* ms */
 #define KPD_SLIDE_POLARITY	CUST_EINT_KPD_SLIDE_POLARITY
 #define KPD_SLIDE_SENSITIVE	CUST_EINT_KPD_SLIDE_SENSITIVE
 
@@ -58,6 +60,7 @@ extern void kpd_backlight_handler(bool pressed, u16 linux_keycode);
 #define kpd_backlight_handler(pressed, linux_keycode)	do {} while (0)
 #endif
 
+/* for META tool */
 extern void kpd_set_backlight(bool onoff, void *val1, void *val2);
 
 #if KPD_PWRKEY_USE_PMIC
@@ -68,8 +71,11 @@ static inline void kpd_pwrkey_pmic_handler(unsigned long data){}
 
 void kpd_pmic_rstkey_handler(unsigned long pressed);
 
-#define TWOKEY_REBOOT_NORMAL_MODE
-#define TWOKEY_REBOOT_OTHER_MODE
-#define KPD_PMIC_LPRST_TD 1 
+#define ONEKEY_REBOOT_NORMAL_MODE
+//#define TWOKEY_REBOOT_NORMAL_MODE
+#define ONEKEY_REBOOT_OTHER_MODE
+//#define TWOKEY_REBOOT_OTHER_MODE
+/* KPD_PMIC_RSTKEY_MAP is defined in cust_kpd.h */
+#define KPD_PMIC_LPRST_TD 1 /* timeout period. 0: 8sec; 1: 11sec; 2: 14sec; 3: 5sec */
 
 #endif
