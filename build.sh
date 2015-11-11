@@ -3,6 +3,8 @@
 
 toolchain="$HOME/kernel_build/aarch64-linux-android-4.9/bin/aarch64-linux-android-"
 source_path=`pwd`
+#kernel_path="$source_path/kernel-3.10"
+kernel_path="$source_path"
 output_path="$source_path/out"
 
 projectName="$1"
@@ -15,6 +17,7 @@ export ARCH_MTK_PLATFORM=mt6752
 
 echo "$projectName";
 
+cd "$kernel_path"
 
 if [ ! -d "$output_path" ]; then
    mkdir "$output_path"
@@ -32,7 +35,7 @@ make ${makeflags} Image.gz-dtb
 
 echo "**** Generate download images ****"
 
-mkimg="${source_path}/tools/mkimage"
+mkimg="${kernel_path}/tools/mkimage"
 
 if [ ! -x ${mkimg} ]; then chmod a+x ${mkimg}; fi
 
