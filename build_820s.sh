@@ -1,1 +1,1 @@
-./build.sh "a50ml"
+./build.sh "a50ml" "$1"

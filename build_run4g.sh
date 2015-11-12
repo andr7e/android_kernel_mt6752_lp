@@ -1,1 +1,1 @@
-./build.sh "ausshine6752_l"
+./build.sh "ausshine6752_l" "$1"
